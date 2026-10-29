@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+    char c[] = "BEOKJDMSXZPMH";
+    char p[] = "CASHNOTNEEDED";
+    int i, k;
+
+    printf("Required key stream: ");
+    for (i = 0; p[i]; i++) {
+        k = (c[i] - 'A' - (p[i] - 'A') + 26) % 26;
+        printf("%d ", k);
+    }
+    printf("\n");
+    return 0;
+}
