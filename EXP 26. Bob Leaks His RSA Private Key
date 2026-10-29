@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main() {
+    printf("Bob's private key has been leaked.\n");
+    printf("Reusing the old RSA modulus is unsafe.\n");
+    printf("Generate a completely new RSA key pair.\n");
+    printf("Use secure padding such as RSA-OAEP for encryption.\n");
+    return 0;
+}
