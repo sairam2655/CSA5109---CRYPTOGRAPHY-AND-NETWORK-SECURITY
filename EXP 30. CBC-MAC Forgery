@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main() {
+    unsigned char X = 0x35;
+    unsigned char T = 0xA7;
+
+    unsigned char second = X ^ T;
+    unsigned char second_input = second ^ T;
+
+    printf("X = %02X\n", X);
+    printf("Assumed MAC T = %02X\n", T);
+    printf("Second message block X XOR T = %02X\n", second);
+    printf("Second CBC input = %02X\n", second_input);
+    printf("Second CBC input equals X: %s\n",
+           second_input == X ? "Yes" : "No");
+    return 0;
+} 
