@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+
+void rotate(char s[], int n) {
+    char temp[29];
+    int i;
+    for (i = 0; i < 28; i++)
+        temp[i] = s[(i+n) % 28];
+    temp[28] = '\0';
+    strcpy(s, temp);
+}
+
+int main() {
+    char C[29] = "1111000011001100101010101111";
+    char D[29] = "0101010101100110011110001111";
+
+    rotate(C, 1);
+    rotate(D, 1);
+
+    printf("C after rotation: %s\n", C);
+    printf("D after rotation: %s\n", D);
+    printf("Each half has 28 bits; select 24 bits from each using PC-2.\n");
+    return 0;
+}
