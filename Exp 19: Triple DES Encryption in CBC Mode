@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <openssl/evp.h>
+
+int main() {
+    unsigned char key[24] = "123456789012345678901234";
+    unsigned char iv[8]  = "12345678";
+    unsigned char text[] = "HELLO CRYPTOGRAPHY";
+    unsigned char out[128];
+    int len, total, i;
+
+    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+
+    EVP_EncryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, key, iv);
+    EVP_EncryptUpdate(ctx, out, &len, text, strlen((char *)text));
+    total = len;
+    EVP_EncryptFinal_ex(ctx, out + total, &len);
+    total += len;
+
+    printf("Plaintext: %s\n", text);
+    printf("3DES-CBC ciphertext (hex): ");
+    for (i = 0; i < total; i++)
+        printf("%02X", out[i]);
+    printf("\n");
+
+    EVP_CIPHER_CTX_free(ctx);
+    return 0;
+}
