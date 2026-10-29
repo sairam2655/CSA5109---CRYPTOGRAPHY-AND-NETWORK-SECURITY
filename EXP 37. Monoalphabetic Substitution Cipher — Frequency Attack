@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char c[1000], p[1000];
+    char eng[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int f[26] = {0}, used[26] = {0}, map[26];
+    int i, j, best;
+
+    printf("Enter ciphertext: ");
+    fgets(c, sizeof(c), stdin);
+
+    for (i = 0; c[i]; i++)
+        if (isalpha((unsigned char)c[i]))
+            f[toupper((unsigned char)c[i]) - 'A']++;
+
+    for (i = 0; i < 26; i++) {
+        best = -1;
+        for (j = 0; j < 26; j++)
+            if (!used[j] && (best < 0 || f[j] > f[best]))
+                best = j;
+        map[best] = eng[i];
+        used[best] = 1;
+    }
+
+    for (i = 0; c[i]; i++) {
+        if (isalpha((unsigned char)c[i]))
+            p[i] = map[toupper((unsigned char)c[i]) - 'A'];
+        else p[i] = c[i];
+    }
+    p[i] = '\0';
+
+    printf("Estimated plaintext: %s", p);
+    return 0;
+}
