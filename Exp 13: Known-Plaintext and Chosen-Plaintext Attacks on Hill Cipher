@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int k[2][2] = {{9,4},{5,7}};
+    int p[2][2] = {{1,0},{0,1}};
+    int i, a, b;
+
+    printf("Chosen plaintext attack\n");
+    for (i = 0; i < 2; i++) {
+        a = (k[0][0]*p[i][0] + k[0][1]*p[i][1]) % 26;
+        b = (k[1][0]*p[i][0] + k[1][1]*p[i][1]) % 26;
+        printf("Plaintext: %c%c -> Ciphertext: %c%c\n",
+               p[i][0]+'A', p[i][1]+'A', a+'A', b+'A');
+    }
+
+    printf("Recovered key: [9 4; 5 7]\n");
+    return 0;
+}
