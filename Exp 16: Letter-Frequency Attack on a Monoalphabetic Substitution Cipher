@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char c[1000], p[1000];
+    char english[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26] = {0}, used[26] = {0};
+    int i, j, best, rank[26];
+
+    printf("Enter ciphertext: ");
+    fgets(c, sizeof(c), stdin);
+
+    for (i = 0; c[i]; i++)
+        if (isalpha((unsigned char)c[i]))
+            count[toupper((unsigned char)c[i])-'A']++;
+
+    for (i = 0; i < 26; i++) {
+        best = -1;
+        for (j = 0; j < 26; j++)
+            if (!used[j] && (best == -1 || count[j] > count[best]))
+                best = j;
+        rank[i] = best;
+        used[best] = 1;
+    }
+
+    for (i = 0; c[i]; i++) {
+        if (isalpha((unsigned char)c[i])) {
+            int x = toupper((unsigned char)c[i]) - 'A';
+            for (j = 0; j < 26 && rank[j] != x; j++);
+            p[i] = english[j];
+        } else p[i] = c[i];
+    }
+    p[i] = '\0';
+
+    printf("Frequency-based guess: %s\n", p);
+    return 0;
+}
