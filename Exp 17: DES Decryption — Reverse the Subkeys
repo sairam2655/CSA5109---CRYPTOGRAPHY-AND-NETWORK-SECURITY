@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int i;
+    int shift[16] =
+        {1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1};
+
+    printf("DES decryption key order:\n");
+    for (i = 15; i >= 0; i--)
+        printf("K%d ", i + 1);
+
+    printf("\nReverse key schedule: ");
+    for (i = 15; i >= 0; i--)
+        printf("%d ", shift[i]);
+
+    printf("\n");
+    return 0;
+}
