@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    unsigned char p[] = {1, 2, 4};
+    unsigned char c[3], d[3];
+    int i;
+
+    printf("Counter Mode (XOR demonstration)\n");
+    for (i = 0; i < 3; i++) {
+        unsigned char stream = i; 
+        c[i] = p[i] ^ stream;
+        d[i] = c[i] ^ stream;
+    }
+
+    printf("Ciphertext: ");
+    for (i = 0; i < 3; i++) printf("%02X ", c[i]);
+    printf("\nDecrypted: ");
+    for (i = 0; i < 3; i++) printf("%02X ", d[i]);
+    printf("\n");
+    return 0;
+}
