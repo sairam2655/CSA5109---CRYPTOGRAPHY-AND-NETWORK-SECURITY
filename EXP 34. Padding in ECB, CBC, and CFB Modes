@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int block = 8, length;
+
+    printf("Enter plaintext length in bytes: ");
+    scanf("%d", &length);
+
+    if (length < 0) {
+        printf("Invalid length\n");
+        return 1;
+    }
+
+    int padded = (length / block + 1) * block;
+
+    printf("Original length: %d bytes\n", length);
+    printf("Padded length: %d bytes\n", padded);
+    printf("Padding added: %d bytes\n", padded - length);
+    printf("Padding is always added to identify message ending.\n");
+    return 0;
+}
