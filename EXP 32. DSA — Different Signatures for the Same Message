@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    int message = 25;
+    int k1 = 7, k2 = 11;
+
+    printf("Message = %d\n", message);
+    printf("First DSA nonce k = %d\n", k1);
+    printf("Second DSA nonce k = %d\n", k2);
+
+    if (k1 != k2)
+        printf("Signatures may differ for the same message.\n");
+
+    printf("Never reuse or reveal the DSA nonce.\n");
+    return 0;
+}
