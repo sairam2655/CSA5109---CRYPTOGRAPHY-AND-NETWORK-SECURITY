@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    int state_bits = 1600;
+    int rate = 1024;
+    int capacity = state_bits - rate;
+    int lanes = capacity / 64;
+
+    printf("State size = %d bits\n", state_bits);
+    printf("Block/rate size = %d bits\n", rate);
+    printf("Capacity = %d bits\n", capacity);
+    printf("Capacity lanes = %d\n", lanes);
+    printf("Without permutation, capacity lanes stay zero.\n");
+    printf("Time for all capacity lanes to become nonzero: never.\n");
+    return 0;
+}
