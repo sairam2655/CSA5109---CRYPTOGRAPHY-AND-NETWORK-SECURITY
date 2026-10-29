@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main() {
+    unsigned char p[] = {0x01, 0x23};
+    unsigned char c[2], d[2];
+    unsigned char iv = 0xAA, key = 0x5A;
+    int i;
+    unsigned char prev = iv;
+
+    for (i = 0; i < 2; i++) {
+        c[i] = p[i] ^ prev ^ key;
+        prev = c[i];
+    }
+
+    printf("Ciphertext: ");
+    for (i = 0; i < 2; i++) printf("%02X ", c[i]);
+
+    prev = iv;
+    for (i = 0; i < 2; i++) {
+        d[i] = c[i] ^ prev ^ key;
+        prev = c[i];
+    }
+
+    printf("\nDecrypted: ");
+    for (i = 0; i < 2; i++) printf("%02X ", d[i]);
+    printf("\n");
+    return 0;
+}
