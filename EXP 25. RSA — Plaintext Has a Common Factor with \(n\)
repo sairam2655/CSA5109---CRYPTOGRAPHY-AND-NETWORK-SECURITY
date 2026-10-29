@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int main() {
+    int n = 3599, m = 59;
+    int g = gcd(m, n);
+
+    printf("n = %d\n", n);
+    printf("Plaintext block = %d\n", m);
+    printf("GCD(m,n) = %d\n", g);
+
+    if (g > 1 && g < n)
+        printf("Factor found! RSA modulus is compromised.\n");
+    else
+        printf("No nontrivial factor found.\n");
+
+    return 0;
+}
