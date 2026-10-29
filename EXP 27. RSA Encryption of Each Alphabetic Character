@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+long long power(long long a, int e, int n) {
+    long long r = 1;
+    while (e--) r = (r * a) % n;
+    return r;
+}
+
+int main() {
+    int e = 31, n = 3599, i;
+
+    printf("Letter  RSA ciphertext\n");
+    for (i = 0; i < 26; i++)
+        printf("%c       %lld\n", 'A' + i, power(i, e, n));
+
+    printf("An attacker can build a lookup table for all letters.\n");
+    return 0;
+}
