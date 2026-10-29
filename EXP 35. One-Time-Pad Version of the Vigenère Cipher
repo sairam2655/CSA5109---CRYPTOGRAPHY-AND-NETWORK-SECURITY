@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char p[200];
+    int key[200], n, i;
+
+    printf("Enter plaintext without spaces: ");
+    scanf("%199s", p);
+    n = strlen(p);
+
+    printf("Enter %d key numbers (0-25): ", n);
+    for (i = 0; i < n; i++)
+        scanf("%d", &key[i]);
+
+    printf("Ciphertext: ");
+    for (i = 0; i < n; i++)
+        putchar((toupper(p[i]) - 'A' + key[i]) % 26 + 'A');
+    printf("\n");
+    return 0;
+}
