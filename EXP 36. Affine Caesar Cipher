@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+int main() {
+    char text[200];
+    int a, b, i;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+    printf("Enter a and b: ");
+    scanf("%d%d", &a, &b);
+
+    if (gcd(a, 26) != 1) {
+        printf("Invalid a: encryption is not one-to-one.\n");
+        return 0;
+    }
+
+    printf("Ciphertext: ");
+    for (i = 0; text[i]; i++) {
+        if (isalpha((unsigned char)text[i]))
+            putchar((toupper(text[i]) - 'A') * a % 26 + b % 26 + 'A' > 0
+                ? ((toupper(text[i]) - 'A') * a + b) % 26 + 'A'
+                : 'A');
+        else
+            putchar(text[i]);
+    }
+    return 0;
+}
