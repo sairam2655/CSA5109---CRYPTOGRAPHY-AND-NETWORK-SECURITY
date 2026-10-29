@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+long long modpow(long long a, int e, int q) {
+    long long r = 1;
+    while (e--) r = (r * a) % q;
+    return r;
+}
+
+int main() {
+    int q = 23, a = 5;
+    int x = 6, y = 15;
+    long long A = modpow(a, x, q);
+    long long B = modpow(a, y, q);
+    long long k1 = modpow(B, x, q);
+    long long k2 = modpow(A, y, q);
+
+    printf("Alice public value = %lld\n", A);
+    printf("Bob public value = %lld\n", B);
+    printf("Alice shared key = %lld\n", k1);
+    printf("Bob shared key = %lld\n", k2);
+    return 0;
+}
