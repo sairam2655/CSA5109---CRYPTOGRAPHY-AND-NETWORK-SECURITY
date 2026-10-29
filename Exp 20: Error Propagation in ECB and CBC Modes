@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int main() {
+    printf("ECB: Error in C1 affects only P1.\n");
+    printf("CBC: Error in transmitted C1 affects P1 and P2.\n");
+    printf("CBC: P3 and later blocks remain unaffected.\n");
+    printf("CBC: Error in source P1 can change C1 and all later ciphertext blocks.\n");
+    printf("At the receiver, subsequent plaintext blocks may be corrupted.\n");
+    return 0;
+}
