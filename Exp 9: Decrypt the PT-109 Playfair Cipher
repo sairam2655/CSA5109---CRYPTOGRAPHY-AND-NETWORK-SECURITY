@@ -1,0 +1,85 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char mat[5][5];
+
+void makeMatrix(char key[]) {
+    int used[26] = {0}, k = 0;
+    used['J' - 'A'] = 1;
+
+    for (int i = 0; key[i]; i++) {
+        char ch = toupper((unsigned char)key[i]);
+        if (ch < 'A' || ch > 'Z') continue;
+        if (ch == 'J') ch = 'I';
+
+        if (!used[ch - 'A']) {
+            mat[k / 5][k % 5] = ch;
+            used[ch - 'A'] = 1;
+            k++;
+        }
+    }
+
+    for (char ch = 'A'; ch <= 'Z'; ch++) {
+        if (!used[ch - 'A']) {
+            mat[k / 5][k % 5] = ch;
+            k++;
+        }
+    }
+}
+
+void findPos(char ch, int *r, int *c) {
+    if (ch == 'J') ch = 'I';
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5; j++)
+            if (mat[i][j] == ch) {
+                *r = i;
+                *c = j;
+                return;
+            }
+}
+
+int main() {
+    char key[100], text[500];
+    printf("Enter keyword: ");
+    fgets(key, sizeof(key), stdin);
+
+    printf("Enter ciphertext: ");
+    fgets(text, sizeof(text), stdin);
+
+    makeMatrix(key);
+    char p[500];
+    int n = 0;
+
+    for (int i = 0; text[i]; i++)
+        if (isalpha((unsigned char)text[i])) {
+            p[n++] = toupper((unsigned char)text[i]);
+        }
+
+    if (n % 2 != 0) {
+        printf("Invalid ciphertext length.\n");
+        return 1;
+    }
+
+    printf("Decrypted text: ");
+
+    for (int i = 0; i < n; i += 2) {
+        int r1, c1, r2, c2;
+        findPos(p[i], &r1, &c1);
+        findPos(p[i + 1], &r2, &c2);
+
+        if (r1 == r2) {
+            printf("%c%c", mat[r1][(c1 + 4) % 5],
+                           mat[r2][(c2 + 4) % 5]);
+        } else if (c1 == c2) {
+            printf("%c%c", mat[(r1 + 4) % 5][c1],
+                           mat[(r2 + 4) % 5][c2]);
+        } else {
+            printf("%c%c", mat[r1][c2], mat[r2][c1]);
+        }
+    }
+
+    printf("\n");
+    return 0;
+}
